@@ -1,0 +1,9 @@
+streamlit==1.26.0
+streamlit-chat==0.0.2
+langchain==0.0.240
+langchain-community==0.0.1
+langchain-ollama==0.0.5
+torch==2.0.1
+langchain-core==0.0.12
+PyMuPDF==1.22.5
+chromadb==0.4.9
