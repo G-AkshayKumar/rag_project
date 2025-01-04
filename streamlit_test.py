@@ -1,7 +1,6 @@
 import os
 import tempfile
 import streamlit as st
-from streamlit_chat import message
 from langchain_community.vectorstores import Chroma
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
