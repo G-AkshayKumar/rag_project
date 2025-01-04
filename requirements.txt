@@ -1,5 +1,4 @@
 streamlit==1.26.0
-streamlit-chat==0.0.2
 langchain==0.0.240
 langchain-community==0.0.1
 langchain-ollama==0.0.5
