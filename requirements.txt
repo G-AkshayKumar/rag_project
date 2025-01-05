@@ -4,6 +4,7 @@ streamlit
 # LangChain ecosystem
 langchain
 langchain_community
+fastembed
 
 # Vector stores / retrieval
 faiss-cpu
