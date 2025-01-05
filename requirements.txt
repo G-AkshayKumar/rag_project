@@ -1,31 +1,26 @@
-# Core app and UI
-streamlit==1.26.0
+# Core app
+streamlit
 
-# Core LangChain packages
-langchain==0.0.275
-langchain_community==0.0.24
-langchain_text_splitters==0.0.5
-langchain_huggingface @ git+https://github.com/hwchase17/langchain.git@<commit_or_tag>#subdirectory=libs/huggingface
-# ^ If the above direct reference is not needed, remove or replace with official PyPI once available
+# LangChain ecosystem
+langchain
+langchain_community
 
-# Vector stores and retrieval
-faiss-cpu==1.7.4
-chromadb==0.3.28
-rank-bm25==0.2.2  # needed for BM25Retriever
+# Vector stores / retrieval
+faiss-cpu
+chromadb
+rank-bm25
 
-# Transformers and pipelines
-transformers==4.33.3
-sentencepiece==0.1.99
-torch==2.0.1
-huggingface-hub==0.16.4
+# Transformers / PyTorch
+transformers
+torch
+sentencepiece
+huggingface-hub
 
-# PDF and document processing
-PyPDF2==3.0.1
-pdfminer.six==20221105
+# PDF + doc parsing
+PyPDF2
+pdfminer.six
 
-# For some text splitting logic
-pydantic==1.10.12
-numpy==1.24.3
-
-# Progress bars, etc. (often needed in behind-the-scenes processes)
-tqdm==4.66.1
+# Other
+pydantic
+numpy
+tqdm
