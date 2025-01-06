@@ -28,8 +28,7 @@ class ChatPDF:
         self.vector_db = None
         self.llm = Ollama(model="""hf.co/bartowski/Llama-3.2-3B-Instruct-GGUF:IQ4_XS""", 
                           temperature=0.2,
-                          base_url="http://localhost:11434",
-                          callbacks=[stream_handler] if stream_handler else None)
+                          base_url="http://localhost:11434")
         self.chain = None
         self.processed_files = []  # Track processed files
 
