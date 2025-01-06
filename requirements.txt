@@ -1,5 +1,6 @@
 # Core app
 streamlit
+streamlit-chat
 
 # LangChain ecosystem
 langchain
