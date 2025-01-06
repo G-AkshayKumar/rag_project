@@ -26,7 +26,10 @@ st.set_page_config(page_title="Chatbot (Folder Version)")
 class ChatPDF:
     def __init__(self):
         self.vector_db = None
-        self.llm = Ollama(model="""hf.co/bartowski/Llama-3.2-3B-Instruct-GGUF:IQ4_XS""", base_url = "http://host.docker.internal:11434")
+        self.llm = Ollama(model="""hf.co/bartowski/Llama-3.2-3B-Instruct-GGUF:IQ4_XS""", 
+                          temperature=0.2,
+                          base_url="http://localhost:11434",
+                          callbacks=[stream_handler] if stream_handler else None)
         self.chain = None
         self.processed_files = []  # Track processed files
 
