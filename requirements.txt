@@ -9,7 +9,7 @@ fastembed
 
 # Vector stores / retrieval
 faiss-cpu
-chromadb
+chromadb==0.4.0
 rank-bm25
 
 # Transformers / PyTorch
