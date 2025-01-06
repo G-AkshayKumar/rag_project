@@ -26,7 +26,7 @@ st.set_page_config(page_title="Chatbot (Folder Version)")
 class ChatPDF:
     def __init__(self):
         self.vector_db = None
-        self.llm = Ollama(model="""hf.co/bartowski/Llama-3.2-3B-Instruct-GGUF:IQ4_XS""", 
+        self.llm = Ollama(model="""mistral""", 
                           temperature=0.2,
                           base_url="http://localhost:11434")
         self.chain = None
