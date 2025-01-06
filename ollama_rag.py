@@ -27,8 +27,7 @@ class ChatPDF:
     def __init__(self):
         self.vector_db = None
         self.llm = Ollama(model="""mistral""", 
-                          temperature=0.2,
-                          base_url="http://127.0.0.1:11434")
+                          temperature=0.2)
         self.chain = None
         self.processed_files = []  # Track processed files
 
