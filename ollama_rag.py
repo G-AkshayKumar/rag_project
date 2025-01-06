@@ -10,6 +10,7 @@ from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import FastEmbedEmbeddings
 from langchain.prompts import ChatPromptTemplate
+from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_core.runnables import RunnablePassthrough
 from langchain.document_loaders.pdf import PyPDFDirectoryLoader
 from langchain.retrievers import BM25Retriever, EnsembleRetriever
@@ -26,15 +27,17 @@ class ChatPDF:
         self.chain = None
         self.processed_files = []  # Track processed files
 
-    def ingest(self, folder_path):
+    def ingest(self, file_path):
         self.processed_files.clear()
-      
-        loader = PyPDFDirectoryLoader(folder_path)
+        # Load the PDF
+        loader = PyMuPDFLoader(file_path=file_path)
         data = loader.load()
-        st.info(f"PDFs loaded from directory successfully: {folder_path}")
-        
+        st.info("PDF loaded successfully")
+
+        # Split the PDF into chunks
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         chunks = text_splitter.split_documents(data)
+        st.info(f"Text split into {len(chunks)} chunks")
 
         # Create vector database
         self.vector_db = Chroma.from_documents(
@@ -100,36 +103,42 @@ def process_input():
         st.session_state["user_input"] = ""
 
 
-def read_and_ingest_folder():
-    folder_path = st.session_state["folder_path"].strip()
-    if os.path.isdir(folder_path):
-        st.session_state["assistant"].clear()
-        st.session_state["messages"] = []
-        st.session_state["user_input"] = ""
-        with st.session_state["ingestion_spinner"], st.spinner(f"Ingesting files from {folder_path}..."):
-            st.session_state["assistant"].ingest(folder_path)
-    else:
-        st.error("Invalid folder path. Please enter a valid directory.")
+def read_and_save_file():
+    st.session_state["assistant"].clear()
+    st.session_state["messages"] = []
+    st.session_state["user_input"] = ""
+
+    for file in st.session_state["file_uploader"]:
+        with tempfile.NamedTemporaryFile(delete=False) as tf:
+            tf.write(file.getbuffer())
+            file_path = tf.name
+
+        with st.session_state["ingestion_spinner"], st.spinner(f"Ingesting {file.name}..."):
+            st.session_state["assistant"].ingest(file_path)
+        os.remove(file_path)
 
 
 def page():
-    if "messages" not in st.session_state:
+    if len(st.session_state) == 0:
         st.session_state["messages"] = []
         st.session_state["assistant"] = ChatPDF()
 
-    st.header("ChatBot (Folder Version)")
+    st.header("Chatbot!! - (PDF Version)")
 
-    st.subheader("Enter Folder Path")
-    st.text_input(
-        "Folder Path",
-        key="folder_path",
-        on_change=read_and_ingest_folder
+    st.subheader("Upload a document")
+    st.file_uploader(
+        "Upload document",
+        type=["pdf"],
+        key="file_uploader",
+        on_change=read_and_save_file,
+        label_visibility="collapsed",
+        accept_multiple_files=True,
     )
 
     st.session_state["ingestion_spinner"] = st.empty()
+
     display_messages()
     st.text_input("Message", key="user_input", on_change=process_input)
-
 
 if __name__ == "__main__":
     page()
