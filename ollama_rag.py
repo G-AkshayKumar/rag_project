@@ -5,7 +5,7 @@ from streamlit_chat import message
 from langchain_community.vectorstores import Chroma
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_ollama.chat_models import ChatOllama
+from langchain_community.llms.ollama import Ollama
 from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
@@ -24,7 +24,7 @@ st.set_page_config(page_title="Chatbot (Folder Version)")
 class ChatPDF:
     def __init__(self):
         self.vector_db = None
-        self.llm = ChatOllama(model="""hf.co/bartowski/Llama-3.2-3B-Instruct-GGUF:IQ4_XS""")
+        self.llm = Ollama(model="""hf.co/bartowski/Llama-3.2-3B-Instruct-GGUF:IQ4_XS""")
         self.chain = None
         self.processed_files = []  # Track processed files
 
