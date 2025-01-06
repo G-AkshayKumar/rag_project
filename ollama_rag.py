@@ -28,7 +28,7 @@ class ChatPDF:
         self.vector_db = None
         self.llm = Ollama(model="""mistral""", 
                           temperature=0.2,
-                          base_url="http://localhost:11434/api/generate")
+                          base_url="http://127.0.0.1:11434")
         self.chain = None
         self.processed_files = []  # Track processed files
 
