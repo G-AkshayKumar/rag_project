@@ -1,3 +1,7 @@
+
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import os
 import tempfile
 import streamlit as st
@@ -15,9 +19,6 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain.document_loaders.pdf import PyPDFDirectoryLoader
 from langchain.retrievers import BM25Retriever, EnsembleRetriever
 from torch import cuda
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 device = "cuda" if cuda.is_available() else "cpu"
 
 st.set_page_config(page_title="Chatbot (Folder Version)")
