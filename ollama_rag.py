@@ -8,9 +8,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_community.llms.ollama import Ollama
 from langchain.retrievers.multi_query import MultiQueryRetriever
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_ollama import OllamaEmbeddings
 from langchain_community.embeddings import FastEmbedEmbeddings
-from langchain_community.document_loaders import PyMuPDFLoader
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain.document_loaders.pdf import PyPDFDirectoryLoader
