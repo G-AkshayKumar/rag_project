@@ -20,6 +20,7 @@ huggingface-hub
 
 # PDF + doc parsing
 PyPDF2
+PyMuPDF
 pdfminer.six
 
 # Other
